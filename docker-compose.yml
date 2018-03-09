@@ -50,6 +50,8 @@ services:
           - BLACKFIRE_CLIENT_ID=${BLACKFIRE_CLIENT_ID}
           - BLACKFIRE_CLIENT_TOKEN=${BLACKFIRE_CLIENT_TOKEN}
         dockerfile: "Dockerfile-${PHP_VERSION}"
+      volumes:
+        - ./workspace/php.ini:/etc/php/7.0/cli/php.ini
       volumes_from:
         - applications
       extra_hosts:

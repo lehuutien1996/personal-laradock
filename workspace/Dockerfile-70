@@ -368,6 +368,15 @@ RUN if [ ${INSTALL_AEROSPIKE} = false ]; then \
 ;fi
 
 #####################################
+# PHPSESSID_SG
+#####################################
+# Change session.name to PHPSESSID_SG
+
+USER root
+
+RUN sed -i -e "s/^session\.name.*/session.name = PHPSESSID_SG/" /etc/php/7.0/cli/php.ini
+
+#####################################
 # PHP V8JS:
 #####################################
 USER root
@@ -383,6 +392,7 @@ RUN if [ ${INSTALL_V8JS} = true ]; then \
     && pecl install v8js \
     && echo "extension=v8js.so" >> /etc/php/7.0/cli/php.ini \
 ;fi
+
 
 #####################################
 # Non-root user : PHPUnit path
