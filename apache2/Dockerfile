@@ -23,6 +23,11 @@ RUN openssl genrsa -out "/etc/apache2/ssl/sslcert.key" 2048 && \
     openssl req -new -key "/etc/apache2/ssl/sslcert.key" -out "/etc/apache2/ssl/sslcert.csr" -subj "/CN=sslcert/O=sslcert/C=UK" && \
     openssl x509 -req -days 365 -in "/etc/apache2/ssl/sslcert.csr" -signkey "/etc/apache2/ssl/sslcert.key" -out "/etc/apache2/ssl/sslcert.crt"
 
+# Enable Proxy
+RUN a2enmod proxy && \
+    a2enmod proxy_balancer && \
+    a2enmod proxy_http
+
 EXPOSE 8080 8443
 
 WORKDIR /var/www/
